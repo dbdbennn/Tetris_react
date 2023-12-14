@@ -10,8 +10,14 @@ export const StyledTetrisWrapper = styled.div`
   overflow: hidden;
 `;
 
+export const StyledTitle = styled.img`
+  height: 60px;
+  width: auto;
+`;
+
 export const StyledTetris = styled.div`
   display: flex;
+  justify-content: center;
   align-items: flex-start;
   padding: 40px;
   margin: 0 auto;
