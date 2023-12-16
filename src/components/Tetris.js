@@ -1,11 +1,7 @@
 import React, { useState } from "react";
 
 import { createStage, checkCollision } from "../gameHelpers";
-import {
-  StyledTetrisWrapper,
-  StyledTetris,
-  StyledTitle,
-} from "./styles/StyledTetris";
+import { StyledTetrisWrapper, StyledTetris } from "./styles/StyledTetris";
 import titleImg from "../img/tetris.png";
 
 // Custom Hooks
@@ -18,18 +14,23 @@ import { useGameStatus } from "../hooks/useGameStatus";
 import Stage from "./Stage";
 import Display from "./Display";
 import StartButton from "./StartButton";
+import {
+  DialogContainer,
+  SaveButtonDialog,
+  TransparentBackground,
+  XButtonDialog,
+} from "./styles/StyledDialog";
 
 // sets up variables to be used for game logic
 const Tetris = () => {
   const [dropTime, setDropTime] = useState(null);
   const [gameOver, setGameOver] = useState(false);
+  const [dialogVisible, setDialogVisible] = useState(false);
 
   const [player, updatePlayerPos, resetPlayer, playerRotate] = usePlayer();
   const [stage, setStage, rowsCleared] = useStage(player, resetPlayer);
   const [score, setScore, rows, setRows, level, setLevel] =
     useGameStatus(rowsCleared);
-
-  console.log("re-render");
 
   const movePlayer = (dir) => {
     if (!checkCollision(player, stage, { x: dir, y: 0 })) {
@@ -72,6 +73,7 @@ const Tetris = () => {
       if (player.pos.y < 1) {
         console.log("GAME OVER!!!");
         setGameOver(true);
+        setDialogVisible(true);
         setDropTime(null);
       }
       updatePlayerPos({ x: 0, y: 0, collided: true });
@@ -106,6 +108,10 @@ const Tetris = () => {
     }
   };
 
+  const handleDialog = () => {
+    setDialogVisible(false);
+  };
+
   // the section brings in other components and shows what the game looks like
   return (
     <StyledTetrisWrapper
@@ -114,6 +120,21 @@ const Tetris = () => {
       onKeyDown={(e) => move(e)}
       onKeyUp={keyUp}
     >
+      {dialogVisible && (
+        <>
+          <DialogContainer>
+            <XButtonDialog onClick={handleDialog}>x</XButtonDialog>
+            <h1>🎮 Save Score 🎮</h1>
+            <label>Name</label>
+            <input placeholder="Enter your name" />
+            <label>Score</label>
+            <input readOnly={true} value={score} />
+            <SaveButtonDialog>SAVE</SaveButtonDialog>
+          </DialogContainer>
+          <TransparentBackground />
+        </>
+      )}
+
       <StyledTetris>
         <Stage stage={stage} />
         <aside>
