@@ -2,9 +2,9 @@
 
 ### Stack
 
-- FrontEnd
+- Front-end
   - **React**: Javascript, Styled Components 사용 
-- BackEnd
+- Back-end
   - **Node.js**: Express 사용해 GET, POST 요청
   - **MySQL**: Ranking 테이블
 
