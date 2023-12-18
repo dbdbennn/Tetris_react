@@ -120,25 +120,27 @@ const Tetris = () => {
       Swal.fire("Please enter you name.", "Your name is required.", "warning");
       return;
     } else {
-      Swal.fire(
-        "Score saved!",
-        "Thanks for playing, Your score is saved!",
-        "success"
-      );
-      setDialogVisible(false);
-      setPlayerName("");
       axios
         .post("http://localhost:3001/api/save_score", {
           name: playerName,
           score,
         })
         .then((response) => {
-          console.log(response.data); // You can handle the response as needed
-          // Additional logic after saving the score, if required
+          Swal.fire(
+            "Score saved!",
+            "Thanks for playing, Your score is saved!",
+            "success"
+          );
+          setDialogVisible(false);
+          setPlayerName("");
         })
         .catch((error) => {
-          console.error("Error saving score:", error);
-          // Handle errors if the score couldn't be saved
+          Swal.fire(
+            "Failed to save your score.",
+            "Please try again later.",
+            "error"
+          );
+          console.log(error);
         });
     }
   };
