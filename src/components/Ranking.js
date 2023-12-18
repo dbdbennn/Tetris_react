@@ -27,6 +27,8 @@ const Ranking = () => {
         setRanking(response.data);
         if (ranking.length === 0) {
           setIsRankingEmpty(true);
+        } else {
+          setIsRankingEmpty(false);
         }
       })
       .catch((error) => {
