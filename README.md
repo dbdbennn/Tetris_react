@@ -3,7 +3,7 @@
 ### Stack
 
 - Front-end
-  - **React**: Javascript, Styled Components 사용 
+  - **React**: Javascript, Styled Components, Custom hook 사용
 - Back-end
   - **Node.js**: Express 사용해 GET, POST 요청
   - **MySQL**: Ranking 테이블
