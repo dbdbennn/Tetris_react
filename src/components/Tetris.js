@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 import { createStage, checkCollision } from "../gameHelpers";
 import { StyledTetrisWrapper, StyledTetris } from "./styles/StyledTetris";
-import titleImg from "../img/tetris.png";
+// import titleImg from "../img/tetris.png";
 
 // Custom Hooks
 import { useInterval } from "../hooks/useInterval";
@@ -20,12 +20,15 @@ import {
   TransparentBackground,
   XButtonDialog,
 } from "./styles/StyledDialog";
+import axios from "axios";
+import Swal from "sweetalert2";
 
 // sets up variables to be used for game logic
 const Tetris = () => {
   const [dropTime, setDropTime] = useState(null);
   const [gameOver, setGameOver] = useState(false);
   const [dialogVisible, setDialogVisible] = useState(false);
+  const [playerName, setPlayerName] = useState("");
 
   const [player, updatePlayerPos, resetPlayer, playerRotate] = usePlayer();
   const [stage, setStage, rowsCleared] = useStage(player, resetPlayer);
@@ -112,6 +115,34 @@ const Tetris = () => {
     setDialogVisible(false);
   };
 
+  const saveScore = () => {
+    if (playerName === "") {
+      Swal.fire("Please enter you name.", "Your name is required.", "warning");
+      return;
+    } else {
+      Swal.fire(
+        "Score saved!",
+        "Thanks for playing, Your score is saved!",
+        "success"
+      );
+      setDialogVisible(false);
+      setPlayerName("");
+      axios
+        .post("http://localhost:3001/api/save_score", {
+          name: playerName,
+          score,
+        })
+        .then((response) => {
+          console.log(response.data); // You can handle the response as needed
+          // Additional logic after saving the score, if required
+        })
+        .catch((error) => {
+          console.error("Error saving score:", error);
+          // Handle errors if the score couldn't be saved
+        });
+    }
+  };
+
   // the section brings in other components and shows what the game looks like
   return (
     <StyledTetrisWrapper
@@ -126,10 +157,15 @@ const Tetris = () => {
             <XButtonDialog onClick={handleDialog}>x</XButtonDialog>
             <h1>🎮 Save Score 🎮</h1>
             <label>Name</label>
-            <input placeholder="Enter your name" />
+            <input
+              placeholder="Enter your name"
+              value={playerName}
+              onChange={(e) => setPlayerName(e.target.value)}
+            />
             <label>Score</label>
             <input readOnly={true} value={score} />
-            <SaveButtonDialog>SAVE</SaveButtonDialog>
+
+            <SaveButtonDialog onClick={saveScore}>SAVE</SaveButtonDialog>
           </DialogContainer>
           <TransparentBackground />
         </>

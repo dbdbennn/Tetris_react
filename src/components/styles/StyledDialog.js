@@ -79,3 +79,9 @@ export const TransparentBackground = styled.div`
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5); /* 반투명한 검정 배경 */
 `;
+
+export const AlertMessageDiv = styled.div`
+  font-size: 10px;
+  color: #d32f2f;
+  margin-bottom: 3px;
+`;
