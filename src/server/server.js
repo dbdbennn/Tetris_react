@@ -32,7 +32,7 @@ app.listen(PORT, () => {
 app.get("/api/get_score", (req, res) => {
   res.header("Access-Control-Allow-Origin", "*");
 
-  const sqlQuery = "SELECT * FROM player_score ORDER BY player_score DESC";
+  const sqlQuery = "SELECT * FROM ranking ORDER BY player_score DESC";
 
   db.query(sqlQuery, (err, result) => {
     res.send(result);
@@ -44,7 +44,7 @@ app.post("/api/save_score", (req, res) => {
   const { name, score } = req.body;
 
   const sqlQuery =
-    "INSERT INTO player_score (player_name, player_score) VALUES (?, ?)";
+    "INSERT INTO ranking (player_name, player_score) VALUES (?, ?)";
   db.query(sqlQuery, [name, score], (err, result) => {
     if (err) {
       res.status(500).send("Error saving score to the database");
