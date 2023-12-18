@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { StyledTetrisWrapper } from "./styles/StyledTetris";
 import {
   MainTitleImg,
   MainWrapper,
@@ -9,27 +8,31 @@ import {
 
 import title from "../img/Ranking.png";
 import {
+  EmptyMessage,
   RankingList,
   RankingListWrapper,
   RankingNumber,
   RankingWrapper,
-  StyledRankingWrapper,
 } from "./styles/StyledRanking";
 import Navigation from "./Nav";
 
 const Ranking = () => {
   const [ranking, setRanking] = useState([]);
+  const [isRankingEmpty, setIsRankingEmpty] = useState(false);
 
   useEffect(() => {
     axios
       .get("http://localhost:3001/api/get_score")
       .then((response) => {
         setRanking(response.data);
+        if (ranking.length === 0) {
+          setIsRankingEmpty(true);
+        }
       })
       .catch((error) => {
         console.error("Error fetching ranking:", error);
       });
-  }, []);
+  }, [ranking]);
 
   return (
     <>
@@ -45,6 +48,11 @@ const Ranking = () => {
                 <RankingList>{player["player_score"]}</RankingList>
               </RankingWrapper>
             ))}
+            {isRankingEmpty && (
+              <>
+                <EmptyMessage>Ranking is Empty.</EmptyMessage>
+              </>
+            )}
           </RankingListWrapper>
         </MainWrapper>
       </StyledMainWrapper>

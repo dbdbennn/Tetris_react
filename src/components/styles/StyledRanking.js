@@ -48,3 +48,9 @@ export const RankingWrapper = styled.div`
   justify-content: space-between;
   gap: 80px;
 `;
+
+export const EmptyMessage = styled.div`
+  color: #bd213c;
+  text-align: center;
+  font-size: 18px;
+`;
