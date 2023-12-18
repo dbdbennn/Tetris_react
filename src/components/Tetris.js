@@ -22,6 +22,7 @@ import {
 } from "./styles/StyledDialog";
 import axios from "axios";
 import Swal from "sweetalert2";
+import Navigation from "./Nav";
 
 // sets up variables to be used for game logic
 const Tetris = () => {
@@ -147,48 +148,51 @@ const Tetris = () => {
 
   // the section brings in other components and shows what the game looks like
   return (
-    <StyledTetrisWrapper
-      role="button"
-      tabIndex="0"
-      onKeyDown={(e) => move(e)}
-      onKeyUp={keyUp}
-    >
-      {dialogVisible && (
-        <>
-          <DialogContainer>
-            <XButtonDialog onClick={handleDialog}>x</XButtonDialog>
-            <h1>🎮 Save Score 🎮</h1>
-            <label>Name</label>
-            <input
-              placeholder="Enter your name"
-              value={playerName}
-              onChange={(e) => setPlayerName(e.target.value)}
-            />
-            <label>Score</label>
-            <input readOnly={true} value={score} />
+    <>
+      <Navigation />
+      <StyledTetrisWrapper
+        role="button"
+        tabIndex="0"
+        onKeyDown={(e) => move(e)}
+        onKeyUp={keyUp}
+      >
+        {dialogVisible && (
+          <>
+            <DialogContainer>
+              <XButtonDialog onClick={handleDialog}>X</XButtonDialog>
+              <h1>🎮 Save Score 🎮</h1>
+              <label>Name</label>
+              <input
+                placeholder="Enter your name"
+                value={playerName}
+                onChange={(e) => setPlayerName(e.target.value)}
+              />
+              <label>Score</label>
+              <input readOnly={true} value={score} />
 
-            <SaveButtonDialog onClick={saveScore}>SAVE</SaveButtonDialog>
-          </DialogContainer>
-          <TransparentBackground />
-        </>
-      )}
+              <SaveButtonDialog onClick={saveScore}>SAVE</SaveButtonDialog>
+            </DialogContainer>
+            <TransparentBackground />
+          </>
+        )}
 
-      <StyledTetris>
-        <Stage stage={stage} />
-        <aside>
-          {gameOver ? (
-            <Display gameOver={gameOver} text="Game Over" />
-          ) : (
-            <div>
-              <Display text={`Score: ${score}`} />
-              <Display text={`rows: ${rows}`} />
-              <Display text={`Level: ${level}`} />
-            </div>
-          )}
-          <StartButton callback={startGame} />
-        </aside>
-      </StyledTetris>
-    </StyledTetrisWrapper>
+        <StyledTetris>
+          <Stage stage={stage} />
+          <aside>
+            {gameOver ? (
+              <Display gameOver={gameOver} text="Game Over" />
+            ) : (
+              <div>
+                <Display text={`Score: ${score}`} />
+                <Display text={`rows: ${rows}`} />
+                <Display text={`Level: ${level}`} />
+              </div>
+            )}
+            <StartButton callback={startGame} />
+          </aside>
+        </StyledTetris>
+      </StyledTetrisWrapper>
+    </>
   );
 };
 

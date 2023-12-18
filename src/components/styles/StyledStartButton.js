@@ -6,12 +6,17 @@ export const StyledStartButton = styled.button`
   padding: 30px;
   min-height: 30px;
   width: 100%;
-  border-radius: 20px;
   border: none;
-  color: white;
-  background: #333;
-  font-family: Pixel, Arial, Helvetica, sans-serif;
-  font-size: 1rem;
+  border-radius: 20px;
+  color: black;
+  background: #f27e7e;
+  font-size: 20px;
   outline: none;
   cursor: pointer;
+  transition: background-color 0.3s ease; /* 배경색 변경 시간 및 이징 설정 */
+
+  &:hover {
+    background-color: #bd6363;
+    color: white; /* 원하는 경우 글자 색상 변경도 가능합니다. */
+  }
 `;

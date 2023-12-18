@@ -6,11 +6,10 @@ export const StyledDisplay = styled.div`
   align-items: center;
   margin: 0 0 20px 0;
   padding: 20px;
-  border: 4px solid #333;
+  border: 4px solid #2d3c58;
   width: 100%;
   border-radius: 20px;
-  color: ${(props) => (props.gameOver ? "red" : "#999")};
-  background: #000;
-  font-family: Pixel, Arial, Helvetica, sans-serif;
-  font-size: 0.8rem;
+  color: ${(props) => (props.gameOver ? "#bd213c" : "#999")};
+  background: #09101e;
+  font-size: 18px;
 `;

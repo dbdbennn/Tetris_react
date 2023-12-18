@@ -21,7 +21,7 @@ export const DialogContainer = styled.div`
     display: block;
     margin-bottom: 5px;
     font-size: 14px;
-    color: #333;
+    color: #2d3c58;
   }
 
   input {
@@ -31,7 +31,7 @@ export const DialogContainer = styled.div`
     border: 1px solid #ccc;
     border-radius: 4px;
     font-size: 14px;
-    color: #333;
+    color: #2d3c58;
     text-align: center;
   }
 
@@ -48,6 +48,7 @@ export const SaveButtonDialog = styled.button`
   background-color: #ebf4fb;
   cursor: pointer;
   transition: background-color 0.3s ease; /* 배경색 변경 시간 및 이징 설정 */
+  font-size: 16px;
 
   /* hover 스타일 */
   &:hover {
@@ -67,7 +68,6 @@ export const XButtonDialog = styled.button`
   line-height: 1;
   padding: 0;
   color: #666;
-  font-family: Pixel, Arial, Helvetica, sans-serif;
   margin: 4px;
 `;
 

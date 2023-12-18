@@ -29,7 +29,7 @@ app.listen(PORT, () => {
   console.log(`server running on port ${PORT}`);
 });
 
-app.get("/api/player_score", (req, res) => {
+app.get("/api/get_score", (req, res) => {
   res.header("Access-Control-Allow-Origin", "*");
 
   const sqlQuery = "SELECT * FROM player_score ORDER BY player_score DESC";
